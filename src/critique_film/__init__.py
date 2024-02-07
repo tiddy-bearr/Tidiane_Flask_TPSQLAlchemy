@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_migrate import Migrate
-from .models import Utilisateur
+from .models import *
 from .database import db
 
 migrate = Migrate()
@@ -19,9 +19,9 @@ def create_app():
 
     migrate.init_app(app, db)
 
-    @app.route("/")
-    def hello_world():
-        return "<p>Hello, World!</p>"
+    from .routes import main
+    app.register_blueprint(main)
+
 
     return app
 
