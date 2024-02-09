@@ -83,15 +83,20 @@ def index():
 
 
 
-@main.route('/api/chambres/disponibles')
-def recherche_chambres_disponibles():
+
+
+
+@main.route('/api/chambres/disponibles', methods=['GET'])
+def get_available_chambres():
     date_arrivee = request.args.get('date_arrivee')
     date_depart = request.args.get('date_depart')
 
+    # Vérifier les chambres disponibles entre les dates spécifiées
     chambres_disponibles = Chambre.query.filter(~Chambre.reservations.any(
         (Reservation.date_arrivee <= date_depart) & (Reservation.date_depart >= date_arrivee)
     )).all()
 
+    # Construire la réponse JSON
     response = []
     for chambre in chambres_disponibles:
         response.append({
