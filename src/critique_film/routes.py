@@ -1,5 +1,6 @@
 #FADHLAOUI MOHAMED-AMINE
 
+
 from flask import Blueprint, render_template
 from .forms import InscriptionForm
 from .database import db
@@ -78,7 +79,6 @@ def cancel_reservation(id):
 
 
 
-#check
 @main.route('/api/chambres', methods=['POST'])
 def add_chambre():
     numero = request.json.get('numero')
