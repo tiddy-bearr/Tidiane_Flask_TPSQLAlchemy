@@ -8,3 +8,10 @@ class InscriptionForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     mot_de_passe = PasswordField('Mot de passe', validators=[DataRequired()])
     submit = SubmitField('Inscription')
+
+
+class createMovieForm(FlaskForm):
+    titre = StringField('Titre', validators=[DataRequired()])
+    realisateur = StringField('Realisateur', validators=[DataRequired()])
+    genre = StringField('Genre', validators=[DataRequired()])
+    submit = SubmitField('Ajouter')

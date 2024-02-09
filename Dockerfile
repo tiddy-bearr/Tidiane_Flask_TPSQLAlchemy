@@ -8,5 +8,5 @@ RUN pip install -r /app/requirements.txt
 COPY src /app
 ENV FLASK_APP=/app/src/critique_film
 
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
-ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+# ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]
