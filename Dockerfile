@@ -3,6 +3,7 @@ FROM python:3.9
 # Installation des dépendances
 # COPY <Hote_chemin> <conteneur_chemin>
 COPY requirements.txt  /app/requirements.txt
+RUN pip install --upgrade pip
 RUN pip install -r /app/requirements.txt
 
 COPY src /app
