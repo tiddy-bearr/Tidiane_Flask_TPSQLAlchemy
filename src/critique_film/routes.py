@@ -106,29 +106,29 @@ def recherche_chambres_disponibles():
 
 @main.route('/api/reservations', methods=['POST'])
 def create_reservation():
-    id = request.json.get('id_client')
-    id = request.json.get('id_chambre')
+    id_client = request.json.get('id_client')
+    id_chambre = request.json.get('id_chambre')
     date_arrivee = request.json.get('date_arrivee')
     date_depart = request.json.get('date_depart')
+    statut = request.json.get('statut')
 
     # Vérifier la disponibilité de la chambre pour les dates demandées
     chambre = Chambre.query.get(id_chambre)
     if chambre is None:
         return jsonify({"success": False, "message": "Chambre introuvable."}), 404
 
-    if chambre.is_available(date_arrivee, date_depart):
+    else :
         # Créer la réservation
         reservation = Reservation(
             id_client=id_client,
             id_chambre=id_chambre,
             date_arrivee=date_arrivee,
-            date_depart=date_depart
+            date_depart=date_depart,
+            statut=statut
         )
         db.session.add(reservation)
         db.session.commit()
         return jsonify({"success": True, "message": "Réservation créée avec succès."}), 201
-    else:
-        return jsonify({"success": False, "message": "La chambre n'est pas disponible pour les dates demandées."}), 400
 
 
 @main.route('/api/reservations/<int:id>', methods=['DELETE'])
@@ -186,3 +186,5 @@ def delete_chambre(id):
     db.session.delete(chambre)
     db.session.commit()
     return jsonify({"success": True, "message": "Chambre supprimée avec succès."})
+
+
